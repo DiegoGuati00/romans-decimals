@@ -8,11 +8,11 @@ export const convertSlice = createSlice({
     reducers: {
         romanToDecimal: (state, e) => {
             console.log(e)
-                // state.value = state;
+            state.value = e.payload;
         },
         decimalToRoman: (state, e) => {
             console.log(e)
-                // state.value = state;
+                state.value = e.payload;
         }
     },
 })

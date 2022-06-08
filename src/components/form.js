@@ -5,7 +5,7 @@ import { decimalToRoman, romanToDecimal } from "../features/convertSlice";
 import Mesaj from "./mensaje";
 
 function FormConverter() {
-  const [optionA, setOptionA] = useState("romanos");
+  const [optionA, setOptionA] = useState("romano");
   const [optionB, setOptionB] = useState("decimal");
   const [payload, setPayload] = useState("");
   const result = useSelector((state) => state.convert.value);
@@ -15,11 +15,11 @@ function FormConverter() {
     const targetId = e.target.id;
     if (targetId === "a" && option === "decimal" && optionB === "decimal") {
       setOptionA("decimal");
-      setOptionB("romanos");
+      setOptionB("romano");
     } else if (
       targetId === "a" &&
-      option === "romanos" &&
-      optionB === "romanos"
+      option === "romano" &&
+      optionB === "romano"
     ) {
       setOptionA("romanos");
       setOptionB("decimal");
@@ -28,11 +28,11 @@ function FormConverter() {
       option === "decimal" &&
       optionA === "decimal"
     ) {
-      setOptionA("romanos");
+      setOptionA("romano");
       setOptionB("decimal");
     } else {
       setOptionA("decimal");
-      setOptionB("romanos");
+      setOptionB("romano");
     }
   };
   
@@ -56,7 +56,7 @@ function FormConverter() {
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label> De </Form.Label>{" "}
               <Form.Select value={optionA} onChange={changeOption} id="a">
-                <option value="romanos"> Romanos </option>{" "}
+                <option value="romano"> Romano </option>{" "}
                 <option value="decimal"> Decimal </option>{" "}
               </Form.Select>{" "}
             </Form.Group>{" "}
@@ -65,7 +65,7 @@ function FormConverter() {
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label> A </Form.Label>{" "}
               <Form.Select id="b" value={optionB} onChange={changeOption}>
-                <option value="romanos"> Romanos </option>{" "}
+                <option value="romano"> Romano </option>{" "}
                 <option value="decimal"> Decimal </option>{" "}
               </Form.Select>{" "}
             </Form.Group>{" "}
@@ -75,13 +75,15 @@ function FormConverter() {
           <Form.Label> {optionA.toUpperCase()} </Form.Label>{" "}
           <Form.Control
             type="text"
-            onChange={(e) => setPayload(e.target.value)}
+            onChange={(e) => setPayload(e.target.value.toLowerCase())}
           />{" "}
         </Form.Group>
+        {result ? 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label> {optionB.toUpperCase()} </Form.Label>{" "}
-          <Mesaj msj={result}/>
-        </Form.Group>
+          <Mesaj msj={result} ss={payload}/>
+        </Form.Group>:""
+        }
         <Button variant="primary" type="submit">
           Convertir{" "}
         </Button>{" "}
